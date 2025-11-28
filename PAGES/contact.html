@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Rythmo | Contacto</title>
+    <link rel="icon" type="image/png" href="/IMAGES/TiredCat_No-bg.png">
+    <link rel="stylesheet" href="/CSS/contactStyles.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d90850e71e.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="top-left">
+            <span><i class="fa-solid fa-phone"></i> +320 9254 021</span>
+            <span><i class="fa-solid fa-envelope"></i> ejemplo.mail@info.com</span>
+        </div>
+
+        <div class="top-right">
+            <div class="header-icons">
+                <!-- WISHLIST -->
+                <a href="#" class="header-icon wishlist" title="Lista de deseos">
+                    <i class="fa-regular fa-heart"></i>
+                </a>
+
+                <!-- CARRITO CON BADGE -->
+                <a href="#" class="header-icon cart" title="Carrito de compras">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <!-- USUARIO LOGUEADO O LOGIN -->
+                <span id="user-name" class="welcome-user" style="display:none"></span>
+                <button id="logout-btn" class="login-btn" style="display:none">Cerrar sesión</button>
+                <a href="/PAGES/login.html" class="login-btn" id="login-btn-link">Iniciar sesión</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="main-header">
+        <div class="header-container">
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                // Verificar token y nombre de usuario en ambos almacenamientos
+                let token = localStorage.getItem("token") || sessionStorage.getItem("token");
+                let name = localStorage.getItem("userName") || sessionStorage.getItem("userName");
+                let currentUser = localStorage.getItem("currentUser") || sessionStorage.getItem("currentUser");
+                if (token && name && currentUser) {
+                    document.getElementById("user-name").textContent = `Bienvenido@, ${name}`;
+                    document.getElementById("user-name").style.display = "inline-block";
+                    document.getElementById("logout-btn").style.display = "inline-block";
+                    document.getElementById("login-btn-link").style.display = "none";
+                } else {
+                    document.getElementById("user-name").style.display = "none";
+                    document.getElementById("logout-btn").style.display = "none";
+                    document.getElementById("login-btn-link").style.display = "inline-block";
+                }
+                // Logout
+                document.getElementById("logout-btn").addEventListener("click", function() {
+                    Swal.fire({
+                        title: "¿Estás seguro de que quieres cerrar sesión?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Sí, cerrar sesión",
+                        cancelButtonText: "Cancelar"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("userName");
+                            localStorage.removeItem("currentUser");
+                            sessionStorage.removeItem("token");
+                            sessionStorage.removeItem("userName");
+                            sessionStorage.removeItem("currentUser");
+                            Swal.fire({
+                                icon: "success",
+                                title: "Sesión cerrada",
+                                text: "Has cerrado sesión correctamente.",
+                                timer: 1500,
+                                showConfirmButton: false
+                            });
+                            setTimeout(function() {
+                                window.location.href = "/PAGES/index.html";
+                            }, 1500);
+                        }
+                    });
+                });
+            </script>
+            <div class="logo">
+                <img src="/IMAGES/TiredCat_No-bg.png" alt="Logo Rythmo" />
+                <div class="logo-text">
+                    <h1>Rythmo</h1>
+                    <span class="slogan">WE BELIEVE IN MUSIC.</span>
+                </div>
+            </div>
+
+            <!-- NAV BAR -->
+            <nav class="navbar">
+                <a class="nav-link" href="/PAGES/index.html">Inicio</a>
+                <a class="nav-link" href="#">Catálogo</a>
+                <a class="nav-link" href="#">Nosotros</a>
+                <a class="nav-link active" href="/PAGES/contact.html">Contacto</a>
+                <a class="nav-link" href="#">FAQ</a>
+                <a href="#" class="nav-link search" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
+            </nav>
+        </div>
+    </header>
+
+  <!-- CONTACT SECTION -->
+  <main class="contact-wrapper">
+        <section class="contacto-header">
+            <h2>Contáctanos</h2>
+            <p>Estamos aquí para ayudarte. Envíanos un mensaje y te responderemos lo antes posible.</p>
+        </section>
+
+        <section class="contact-top">
+            <div class="contact-form-box">
+                <form id="form-contacto">
+                <div class="form-row">
+                    <input type="email" id="email" placeholder="Email*" required>
+                    <input type="tel" id="phone" placeholder="Telefono*">
+                </div>
+                    <input type="text" id="name" placeholder="Nombre*" required>
+                    <textarea id="message" placeholder="Mensaje*" rows="5" required></textarea>
+                    <button id="submitContact" type="submit">Enviar</button>
+                </form>
+            </div>
+
+        <div class="newsletter-box">
+            <h3>Únete a nuestra comunidad Rythmo</h3>
+            <p>Descubre nuevos arrtistas, instrumentos únicos y álbumes coleccionables. <br>¡Sé el primero en enterarte de nuestros lanzamientos y promociones!</p>
+                <form id="newsletter-form">
+                <input type="email" id="newsletter-email" placeholder="Email" required>
+                <button id="subsNewsletter" type="submit">Suscribirse</button>
+            </form>
+        </div>
+        </section>
+
+    <section class="contact-cards">
+        <div class="card">
+            <i class="fa-solid fa-phone icon-contact"></i>
+            <h4>(+52) 55 1234 5678</h4>
+            <p>Atención telefónica disponible de lunes a viernes, de 9:00 a 18:00 hrs.</p>
+        </div>
+        <div class="card">
+            <i class="fa-solid fa-envelope icon-contact"></i>
+            <h4>soporte@rythmo.com</h4>
+            <p>Estamos aquí para escucharte. Escríbenos y te responderemos pronto.</p>
+        </div>
+        <div class="card">
+            <i class="fa-solid fa-location-dot icon-contact"></i>
+            <h4>Universidad Autónoma de Aguascalientes</h4>
+            <p>Av. Universidad 940, Ciudad Universitaria, C.P. 20100, Aguascalientes, Ags.</p>
+        </div>
+    </section>
+
+    <section class="contact-map">
+        <div class="map-container">
+            <h3>Nuestra Ubicación</h3>
+            <div class="map-wrapper">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d3701.6370772490664!2d-102.3154096!3d21.9100469!3m2!1i1024!2i768!4f13.1!2m1!1suaa%20direcci%C3%B3n!5e0!3m2!1ses!2smx!4v1762121767925!5m2!1ses!2smx"
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <p class="map-note"> UAA - Ven a visitarnos</p>
+        </div>
+    </section>
+
+  </main>
+
+      <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3>Rythmo</h3>
+                        <p>Tu tienda de música de confianza desde 1975.</p>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces rápidos</h4>
+                    <ul>
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Catálogo</a></li>
+                        <li><a href="#">Nosotros</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#">Restauración</a></li>
+                        <li><a href="#">Valuación</a></li>
+                        <li><a href="#">Envíos</a></li>
+                        <li><a href="#">Garantía</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Calle Vintage 123, Ciudad</p>
+                        <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                        <p><i class="fas fa-envelope"></i> info@rythmo.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rythmo. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Rythmo | Tienda de Música</title>
+    <link rel="icon" type="image/png" href="/IMAGES/TiredCat_No-bg.png"/>
+    <script src="https://kit.fontawesome.com/d90850e71e.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/CSS/indexStyles.css">
+</head>
+
+<body>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="top-left">
+            <span><i class="fa-solid fa-phone"></i> +320 9254 021</span>
+            <span><i class="fa-solid fa-envelope"></i> ejemplo.mail@info.com</span>
+        </div>
+
+        <div class="top-right">
+            <div class="header-icons">
+                <!-- WISHLIST -->
+                <a href="#" class="header-icon wishlist" title="Lista de deseos">
+                    <i class="fa-regular fa-heart"></i>
+                </a>
+
+                <!-- CARRITO CON BADGE -->
+                <a href="#" class="header-icon cart" title="Carrito de compras">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <!-- USUARIO LOGUEADO O LOGIN -->
+                <span id="user-name" class="welcome-user" style="display:none"></span>
+                <button id="logout-btn" class="login-btn" style="display:none">Cerrar sesión</button>
+                <a href="login.html" class="login-btn" id="login-btn-link">Iniciar sesión</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="main-header">
+        <div class="header-container">
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                // Verificar token y nombre de usuario en ambos almacenamientos
+                let token = localStorage.getItem("token") || sessionStorage.getItem("token");
+                let name = localStorage.getItem("userName") || sessionStorage.getItem("userName");
+                let currentUser = localStorage.getItem("currentUser") || sessionStorage.getItem("currentUser");
+                if (token && name && currentUser) {
+                    document.getElementById("user-name").textContent = `Bienvenido@, ${name}`;
+                    document.getElementById("user-name").style.display = "inline-block";
+                    document.getElementById("logout-btn").style.display = "inline-block";
+                    document.getElementById("login-btn-link").style.display = "none";
+                } else {
+                    document.getElementById("user-name").style.display = "none";
+                    document.getElementById("logout-btn").style.display = "none";
+                    document.getElementById("login-btn-link").style.display = "inline-block";
+                }
+                // Logout
+                document.getElementById("logout-btn").addEventListener("click", function() {
+                    Swal.fire({
+                        title: "¿Estás seguro de que quieres cerrar sesión?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Sí, cerrar sesión",
+                        cancelButtonText: "Cancelar"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("userName");
+                            localStorage.removeItem("currentUser");
+                            sessionStorage.removeItem("token");
+                            sessionStorage.removeItem("userName");
+                            sessionStorage.removeItem("currentUser");
+                            Swal.fire({
+                                icon: "success",
+                                title: "Sesión cerrada",
+                                text: "Has cerrado sesión correctamente.",
+                                timer: 1500,
+                                showConfirmButton: false
+                            });
+                            setTimeout(function() {
+                                window.location.href = "/PAGES/index.html";
+                            }, 1500);
+                        }
+                    });
+                });
+            </script>
+            <div class="logo">
+                <img src="/IMAGES/TiredCat_No-bg.png" alt="Logo Rythmo" />
+                <div class="logo-text">
+                    <h1>Rythmo</h1>
+                    <span class="slogan">WE BELIEVE IN MUSIC.</span>
+                </div>
+            </div>
+
+            <!-- NAV BAR -->
+            <nav class="navbar">
+                <a class="nav-link active" href="/PAGES/index.html">Inicio</a>
+                <a class="nav-link" href="#">Catálogo</a>
+                <a class="nav-link" href="#">Nosotros</a>
+                <a class="nav-link" href="/PAGES/contact.html">Contacto</a>
+                <a class="nav-link" href="#">FAQ</a>
+                <a href="#" class="nav-link search" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2>Descubre el sonido</h2>
+                <p>Discos, albumes e instrumentos con alma y carácter. Revive la auténtica experiencia musical.</p>
+                <a class="btn hero-btn" href="#">Explorar catálogo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED PRODUCTS -->
+    <section class="featured-products">
+        <div class="container">
+            <h2 class="section-title">Productos Destacados</h2>
+            <div class="products-grid">
+                <!-- Producto 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <div class="product-badge">Nuevo</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Guitarra Acústica</h3>
+                        <p class="product-description">Sonido cálido y auténtico</p>
+                        <div class="product-price">$450</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart"><i class="fa-solid fa-cart-plus"></i> Añadir</button>
+                            <button class="add-to-wishlist"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <div class="product-badge">Oferta</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Vinilo - The Beatles</h3>
+                        <p class="product-description">Edición especial Abbey Road, 1969.</p>
+                        <div class="product-price">
+                            <span class="current-price">$75</span>
+                            <span class="original-price">$90</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart"><i class="fa-solid fa-cart-plus"></i> Añadir</button>
+                            <button class="add-to-wishlist"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Map of the Soul: 7 -The Journey-</h3>
+                        <p class="product-description">BTS</p>
+                        <div class="product-price">$620</div>
+                        <div class="product-badge">Importado</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart"><i class="fa-solid fa-cart-plus"></i> Añadir</button>
+                            <button class="add-to-wishlist"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        
+                        <div class="product-badge">Popular</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Batería Jazz</h3>
+                        <p class="product-description">Set completo con sonido suave y profundo.</p>
+                        <div class="product-price">$890</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart"><i class="fa-solid fa-cart-plus"></i> Añadir</button>
+                            <button class="add-to-wishlist"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-cta">
+                <a href="#" class="btn btn-outline">Ver todos los productos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title">Nuestra Historia</h2>
+                <p>Desde 1975, Rythmo ha sido el destino para los amantes de la música auténtica. Nos especializamos en instrumentos y mercancía  original, cada uno con su propia historia que contar.</p>
+                <p>Nuestra pasión por el sonido cálido y la calidad nos impulsa a buscar las piezas más especiales para los oídos más exigentes.</p>
+                <div class="about-features">
+                    <div class="feature">
+                        <i class="fa-solid fa-medal"></i>
+                        <span>Calidad garantizada</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fa-solid fa-tools"></i>
+                        <span>Garantía en reparación</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fa-solid fa-shipping-fast"></i>
+                        <span>Envío rápido</span>
+                    </div>
+                </div>
+                <a href="#" class="btn">Conoce más</a>
+            </div>
+            <div class="about-image">
+                <i class="fa-solid fa-music"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Únete a nuestra comunidad</h2>
+                <p>Recibe noticias sobre nuevos productos, eventos exclusivos y ofertas especiales.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Tu correo electrónico" required>
+                    <button type="submit">Suscribirse <i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3>Rythmo</h3>
+                        <p>Tu tienda de música de confianza desde 1975.</p>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces rápidos</h4>
+                    <ul>
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Catálogo</a></li>
+                        <li><a href="#">Nosotros</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#">Restauración</a></li>
+                        <li><a href="#">Valuación</a></li>
+                        <li><a href="#">Envíos</a></li>
+                        <li><a href="#">Garantía</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Calle Vintage 123, Ciudad</p>
+                        <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                        <p><i class="fas fa-envelope"></i> info@rythmo.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Rythmo. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
