@@ -110,7 +110,7 @@ function uploadProductImage(imageFile) {
         console.log("Enviando imagen al servidor...");
         console.log("Archivo:", imageFile.name, "Tamaño:", imageFile.size);
 
-        fetch('http://localhost:3000/api/images/upload', {
+        fetch('https://web-uzbxzi459pkp.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/images/upload', {
             method: 'POST',
             body: formData
         })
@@ -196,7 +196,7 @@ function updateHeader(page) {
 // ===== FUNCIONES DE DATOS =====
 function loadDashboardData() {
     // Cargar productos para actualizar contador
-    fetch('http://localhost:3000/api/products')
+    fetch('https://web-uzbxzi459pkp.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/products')
         .then(response => response.json())
         .then(products => {
             const totalProducts = document.getElementById('total-products');
@@ -207,7 +207,7 @@ function loadDashboardData() {
         .catch(error => console.error('Error al cargar productos:', error));
     
     // Cargar clientes para actualizar contador
-    fetch('http://localhost:3000/api/usuarios')
+    fetch('https://web-uzbxzi459pkp.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/usuarios')
         .then(response => response.json())
         .then(clients => {
             const totalCustomers = document.getElementById('total-customers');
@@ -254,7 +254,7 @@ async function loadClients() {
     container.innerHTML = '<div class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Cargando clientes...</div>';
     
     try {
-        const response = await fetch('http://localhost:3000/api/usuarios');
+        const response = await fetch('https://web-uzbxzi459pkp.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/usuarios');
         
         if (!response.ok) {
             throw new Error(`Error ${response.status}: ${response.statusText}`);
@@ -471,7 +471,7 @@ async function handleAddProduct(event) {
         console.log(" Guardando producto en la base de datos...");
         console.log("Datos a enviar:", productData);
         
-        const response = await fetch('http://localhost:3000/api/products', {
+        const response = await fetch('https://web-uzbxzi459pkp.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/products', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -527,7 +527,7 @@ async function handleSearchProduct() {
     }
     
     try {
-        const response = await fetch(`http://localhost:3000/api/products/search?nombre=${encodeURIComponent(searchTerm)}`);
+        const response = await fetch(`https://web-uzbxzi459pkp.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/products/search?nombre=${encodeURIComponent(searchTerm)}`);
         
         if (!response.ok) {
             throw new Error(`Error ${response.status}`);
@@ -588,7 +588,7 @@ function displaySearchResults(products) {
 
 async function loadProductForUpdate(productId) {
     try {
-        const response = await fetch(`http://localhost:3000/api/products/${productId}`);
+        const response = await fetch(`https://web-uzbxzi459pkp.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/products/${productId}`);
         
         if (!response.ok) {
             throw new Error(`Error ${response.status}`);
@@ -765,7 +765,7 @@ async function handleUpdateProduct(event, productId) {
         }
         
         // Enviar actualización
-        const response = await fetch(`http://localhost:3000/api/products/${productId}`, {
+        const response = await fetch(`https://web-uzbxzi459pkp.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/products/${productId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -818,7 +818,7 @@ async function loadProductsForDeletion() {
     container.innerHTML = '<div class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Cargando productos...</div>';
     
     try {
-        const response = await fetch('http://localhost:3000/api/products');
+        const response = await fetch('https://web-uzbxzi459pkp.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/products');
         
         if (!response.ok) {
             throw new Error(`Error ${response.status}: ${response.statusText}`);
@@ -895,7 +895,7 @@ async function deleteProduct(productId, productName) {
     }
     
     try {
-        const response = await fetch(`http://localhost:3000/api/products/${productId}`, {
+        const response = await fetch(`https://web-uzbxzi459pkp.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/products/${productId}`, {
             method: 'DELETE'
         });
         
