@@ -2,7 +2,7 @@
   "routes": [
     {
       "src": "/",
-      "dest": "/PAGES/index.html.html"
+      "dest": "/PAGES/index.html"
     },
     {
       "src": "/(.*)",
